@@ -4,7 +4,11 @@ set -x
 
 # export JAVA_HOME=/usr/lib/jvm/java-1.6.0-openjdk-1.6.0.34.x86_64/jre/
 
-java -jar /opt/gerrit/site_path/gerrit.war init -d /opt/gerrit/site_path --batch --no-auto-start
+java -jar /opt/gerrit/site_path/gerrit.war init -d /opt/gerrit/site_path \
+  --batch --no-auto-start \
+  --install-plugin commit-message-length-validator \
+  --install-plugin download-commands \
+  --install-plugin replication
 java -jar /opt/gerrit/site_path/gerrit.war reindex -d /opt/gerrit/site_path
 
 # Init admin user

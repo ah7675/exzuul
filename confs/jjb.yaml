@@ -10,7 +10,7 @@
        - shell: |
            zuul-cloner http://ci.localdomain:8080 $ZUUL_PROJECT
            cd $ZUUL_PROJECT
-           ./run_tests.sh
+           env
 
 - project:
      name: testproject

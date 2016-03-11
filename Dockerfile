@@ -11,7 +11,7 @@ ENV GERRIT_VERSION 2.12.1
 
 ENV GERRIT_URL https://www.gerritcodereview.com/download/gerrit-${GERRIT_VERSION}.war
 
-ENV JENKINS_VERSION 1.609.3
+ENV JENKINS_VERSION 1.580.3
 ENV JENKINS_REPO_KEY https://jenkins-ci.org/debian/jenkins-ci.org.key
 ENV JENKINS_REPO_PLUGINS https://updates.jenkins-ci.org/download/plugins
 ENV JENKINS_GEARMAN_PLUGIN ${JENKINS_REPO_PLUGINS}/gearman-plugin/0.1.3/gearman-plugin.hpi
@@ -36,14 +36,15 @@ RUN mkdir -p /etc/zuul
 RUN mkdir -p /var/log/zuul
 RUN mkdir -p /var/lib/zuul
 RUN mkdir -p /var/www/zuul
-RUN git clone https://github.com/openstack-infra/zuul /tmp/zuul
-RUN pip install /tmp/zuul
-RUN cp -Rf /tmp/zuul/etc/status/public_html/* /var/www/zuul/
-RUN rm -Rf /tmp/zuul
-
-RUN curl --silent --show-error --retry 12 --retry-delay 10 -L -o /var/www/zuul/fetch.sh https://raw.githubusercontent.com/openstack-infra/zuul/master/etc/status/fetch-dependencies.sh
-RUN sed -i "s|public_html/||" /var/www/zuul/fetch.sh
-RUN bash /var/www/zuul/fetch.sh
+RUN pip install zuul
+#RUN git clone https://github.com/openstack-infra/zuul /tmp/zuul
+#RUN pip install /tmp/zuul
+#RUN cp -Rf /tmp/zuul/etc/status/public_html/* /var/www/zuul/
+#RUN rm -Rf /tmp/zuul
+#
+#RUN curl --silent --show-error --retry 12 --retry-delay 10 -L -o /var/www/zuul/fetch.sh https://raw.githubusercontent.com/openstack-infra/zuul/master#/etc/status/fetch-dependencies.sh
+#RUN sed -i "s|public_html/||" /var/www/zuul/fetch.sh
+#RUN bash /var/www/zuul/fetch.sh
 
 RUN mkdir /etc/jenkins_jobs
 RUN mkdir /etc/jenkins_jobs/jobs
